@@ -64,7 +64,6 @@ func (StrDB *StrDB) MiddleWare() (mw *jwt.GinJWTMiddleware) { // the jwt middlew
 		Authorizator: func(data interface{}, c *gin.Context) bool {
 			fmt.Println()
 			claims := jwt.ExtractClaims(c)
-
 			var result bool
 			if claims["role"] == "admin" || claims["role"] == "guest" {
 				result = true
