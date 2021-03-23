@@ -3,12 +3,11 @@ package main
 import (
 	"net/http"
 	"todolist-graphql/config"
-	"todolist-graphql/executions"
 	"todolist-graphql/migrator"
+	"todolist-graphql/schema"
 	"todolist-graphql/seeder"
 
 	"github.com/gin-gonic/gin"
-	"gorm.io/gorm/schema"
 )
 
 func main() {
@@ -26,8 +25,7 @@ func main() {
 		var query Query
 
 		c.Bind(&query)
-		result := executions.ExecuteQuery(query.Query, schema.Schema)
-
+		result := schema.ExecuteQuery(query.Query, schema.Schema)
 		c.JSON(http.StatusOK, result)
 	})
 

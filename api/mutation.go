@@ -12,10 +12,70 @@ import (
 var MutationType = graphql.NewObject(
 	graphql.ObjectConfig{
 
-		Name: "user",
+		Name: "mutation",
+
 		Fields: graphql.Fields{
 
-			"create": &graphql.Field{
+			"CreateTask": &graphql.Field{
+				Type: types.TaskType,
+				Args: graphql.FieldConfigArgument{
+
+					"tasknama": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"completed": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					task := models.Task{
+						TaskNama:  p.Args["tasknama"].(string),
+						Completed: p.Args["completed"].(string),
+					}
+					dbPG := config.Connect()
+
+					dbPG.Create(&task)
+					return task, nil
+				},
+			},
+
+			"UpdateTask": &graphql.Field{
+				Type: types.TaskType,
+				Args: graphql.FieldConfigArgument{
+					"id": &graphql.ArgumentConfig{ // id nggak boleh kosong
+						Type: graphql.NewNonNull(graphql.Int),
+					},
+					"tasknama": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"completed": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+			},
+
+			"DeleteTask": &graphql.Field{
+				Type: types.TaskType,
+				Args: graphql.FieldConfigArgument{ // untuk param
+					"id": &graphql.ArgumentConfig{ // id nggak boleh kosong
+						Type: graphql.NewNonNull(graphql.Int),
+					},
+				},
+				// kalau di rest resolve itu kayak controller
+				Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+					ID, CheckId := p.Args["id"].(int)
+
+					dbPG := config.Connect()
+					TaskVar := models.Task{}
+
+					if CheckId {
+						dbPG.Where("id = ?", ID).Delete(&TaskVar)
+					}
+
+					return TaskVar, nil // untuk response yang akan ditampilkan
+				},
+			},
+			"CreateUser": &graphql.Field{
 				Type: types.UserType,
 				Args: graphql.FieldConfigArgument{
 
@@ -46,7 +106,7 @@ var MutationType = graphql.NewObject(
 				},
 			},
 
-			"update": &graphql.Field{
+			"UpdateUser": &graphql.Field{
 				Type: types.UserType,
 				Args: graphql.FieldConfigArgument{ // untuk param
 					"id": &graphql.ArgumentConfig{ // id nggak boleh kosong
@@ -69,7 +129,7 @@ var MutationType = graphql.NewObject(
 				Resolve: resolver.UpdateUserResolve,
 			},
 
-			"delete": &graphql.Field{
+			"DeleteUser": &graphql.Field{
 				Type: types.UserType,
 				Args: graphql.FieldConfigArgument{ // untuk param
 					"id": &graphql.ArgumentConfig{ // id nggak boleh kosong

@@ -16,6 +16,7 @@ func TaskSeeder(db *gorm.DB) {
 		{"main kelereng", "false"},
 		{"Nonton netflix", "false"},
 		{"main dota2 sampai pagi", "true"},
+		{"tidur", "true"},
 	}
 
 	var task models.Task
@@ -27,5 +28,5 @@ func TaskSeeder(db *gorm.DB) {
 		task.Completed = data[1]
 		db.Create(&task)
 	}
-	fmt.Println("seed!")
+	fmt.Println("data restored!")
 }
