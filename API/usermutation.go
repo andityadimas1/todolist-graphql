@@ -11,6 +11,7 @@ import (
 
 var MutationType = graphql.NewObject(
 	graphql.ObjectConfig{
+
 		Name: "user",
 		Fields: graphql.Fields{
 
@@ -103,7 +104,7 @@ var MutationType = graphql.NewObject(
 	},
 	// graphql.ObjectConfig{
 	// 	Name: "task",
-	// 	"createTask": &graphql.Field{
+	// 	"CreateTask": &graphql.Field{
 	// 		Type: types.TaskType,
 	// 		Args: graphql.FieldConfigArgument{
 
@@ -123,6 +124,27 @@ var MutationType = graphql.NewObject(
 
 	// 			dbPG.Create(&task)
 	// 			return task, nil
+	// 		},
+	// 	},
+	// 	"DeleteTask": &graphql.Field{
+	// 		Type: types.TaskType,
+	// 		Args: graphql.FieldConfigArgument{ // untuk param
+	// 			"id": &graphql.ArgumentConfig{ // id nggak boleh kosong
+	// 				Type: graphql.NewNonNull(graphql.Int),
+	// 			},
+	// 		},
+	// 		// kalau di rest resolve itu kayak controller
+	// 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+	// 			ID, CheckId := p.Args["id"].(int)
+
+	// 			dbPG := config.Connect()
+	// 			TaskVar := models.Task{}
+
+	// 			if CheckId {
+	// 				dbPG.Where("id = ?", ID).Delete(&TaskVar)
+	// 			}
+
+	// 			return TaskVar, nil // untuk response yang akan ditampilkan
 	// 		},
 	// 	},
 	// },
