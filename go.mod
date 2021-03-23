@@ -3,7 +3,9 @@ module todolist-graphql
 go 1.13
 
 require (
-	github.com/gin-gonic/gin v1.6.3 // indirect
+	github.com/appleboy/gin-jwt v2.5.0+incompatible // indirect
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
+	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.5.1 // indirect
 	github.com/graphql-go/graphql v0.7.9
@@ -20,6 +22,7 @@ require (
 	golang.org/x/sys v0.0.0-20210320140829-1e4c9ba3b0c4 // indirect
 	golang.org/x/text v0.3.5 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+	gopkg.in/dgrijalva/jwt-go.v3 v3.2.0 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gorm.io/driver/postgres v1.0.8
 	gorm.io/gorm v1.21.4
