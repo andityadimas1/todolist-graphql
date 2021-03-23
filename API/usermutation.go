@@ -11,8 +11,9 @@ import (
 
 var MutationType = graphql.NewObject(
 	graphql.ObjectConfig{
-		Name: "User",
+		Name: "user",
 		Fields: graphql.Fields{
+
 			"create": &graphql.Field{
 				Type: types.UserType,
 				Args: graphql.FieldConfigArgument{
@@ -100,4 +101,29 @@ var MutationType = graphql.NewObject(
 			},
 		},
 	},
+	// graphql.ObjectConfig{
+	// 	Name: "task",
+	// 	"createTask": &graphql.Field{
+	// 		Type: types.TaskType,
+	// 		Args: graphql.FieldConfigArgument{
+
+	// 			"tasknama": &graphql.ArgumentConfig{
+	// 				Type: graphql.String,
+	// 			},
+	// 			"completed": &graphql.ArgumentConfig{
+	// 				Type: graphql.String,
+	// 			},
+	// 		},
+	// 		Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+	// 			task := models.Task{
+	// 				TaskNama:  p.Args["tasknama"].(string),
+	// 				Completed: p.Args["completed"].(string),
+	// 			}
+	// 			dbPG := config.Connect()
+
+	// 			dbPG.Create(&task)
+	// 			return task, nil
+	// 		},
+	// 	},
+	// },
 )
