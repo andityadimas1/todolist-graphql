@@ -1,4 +1,4 @@
-package executions
+package schema
 
 import (
 	"fmt"

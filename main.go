@@ -5,9 +5,8 @@ import (
 	"todolist-graphql/config"
 	"todolist-graphql/middleware"
 	"todolist-graphql/migrator"
-	"todolist-graphql/seeder"
-
 	"todolist-graphql/schema"
+	"todolist-graphql/seeder"
 
 	"github.com/gin-gonic/gin"
 )
